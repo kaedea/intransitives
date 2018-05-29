@@ -1,1 +1,4 @@
-include ':app', ':intransitive'
+if ('true' != System.env.JITPACK) {
+    include ':app'
+}
+include ':intransitive'
