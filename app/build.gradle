@@ -54,7 +54,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.kaedea:intransitives:0.2.0-kara'
+        classpath 'com.kaedea:intransitives:0.2.1'
     }
 }
 
