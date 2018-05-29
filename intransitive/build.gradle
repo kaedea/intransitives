@@ -17,15 +17,15 @@ dependencies {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 group = 'com.kaedea.gradle'
 version = '0.1.0'
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri(local_maven))
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
         }
     }
 }
