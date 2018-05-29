@@ -54,11 +54,11 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.kaedea.gradle:intransitive:0.2.0'
+        classpath 'com.kaedea:intransitives:0.2.0-kara'
     }
 }
 
-apply plugin: 'com.kaedea.gradle.intransitive'
+apply plugin: 'com.kaedea.intransitives'
 intransitives {
     // Picasso
     implementation 'com.squareup.picasso:picasso:latest.release'
