@@ -61,6 +61,6 @@ buildscript {
 apply plugin: 'com.kaedea.gradle.intransitive'
 
 intransitives {
-    compile 'com.squareup.picasso:picasso:latest.release'
+    implementation 'com.squareup.picasso:picasso:latest.release'
 }
 
