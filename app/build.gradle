@@ -54,7 +54,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath group: 'com.kaedea.gradle', name: 'intransitive', version: '0.1.0'
+        classpath 'com.kaedea.gradle:intransitive:0.2.0'
     }
 }
 

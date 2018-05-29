@@ -22,15 +22,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-
-            groupId group
-            artifactId name
-            version version
-
             artifact sourceJar {
                 classifier "sources"
             }
-
             pom.withXml {
                 def node = asNode()
 
