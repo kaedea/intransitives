@@ -1,0 +1,57 @@
+// 'maven-publish' is a newer plugin than 'maven'
+// See 'https://docs.gradle.org/current/userguide/publishing_maven.html'
+apply plugin: 'maven-publish'
+
+group = GROUP
+version = VERSION_NAME
+
+def isReleaseBuild() { return version.contains("SNAPSHOT") == false }
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+tasks.withType(Javadoc).all {
+    enabled = false
+    options.encoding = 'UTF-8'
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId group
+            artifactId name
+            version version
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+
+            pom.withXml {
+                def node = asNode()
+
+                node.children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    packaging POM_PACKAGING
+                    description POM_DESCRIPTION
+                    name project.getName()
+                    licenses {
+                        license {
+                            name 'Apache License Version 2.0'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id POM_DEVELOPER_ID
+                            name POM_DEVELOPER_NAME
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
