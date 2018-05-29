@@ -1,4 +1,4 @@
-package com.kaedea.nontransitivec
+package com.kaedea.demo.intransitive
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

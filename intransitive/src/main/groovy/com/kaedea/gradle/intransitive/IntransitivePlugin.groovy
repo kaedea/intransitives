@@ -21,8 +21,8 @@ class IntransitivePlugin implements Plugin<Project> {
         project.getGradle().addListener(new DependencyResolutionListener() {
             @Override
             void beforeResolve(ResolvableDependencies resolvableDependencies) {
-                project.logger.info "========================"
-                project.logger.info "Intransitive plugin DependencyResolutionListener#beforeResolve"
+                project.logger.lifecycle "========================"
+                project.logger.lifecycle "Intransitive plugin DependencyResolutionListener#beforeResolve"
                 project.logger.info "Dumping deps info, = ${project.extensions[PLUGIN_EXT_CONFIG].deps}"
                 project.extensions[PLUGIN_EXT_CONFIG].deps.each { addDependency(project, it) }
                 project.getGradle().removeListener(this)

@@ -1,4 +1,4 @@
-package com.kaedea.nontransitivec
+package com.kaedea.demo.intransitive
 
 import org.junit.Test
 

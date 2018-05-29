@@ -16,7 +16,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.kaedea.nontransitivec"
+        applicationId "com.kaedea.demo.intransitive"
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
@@ -41,6 +41,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
+// ----------
+// Plugin intransitives
+// ----------
 // Build plugin to local repository before applying.
 // './gradlew :intransitive:uploadArchives --i'
 
@@ -58,6 +61,6 @@ buildscript {
 apply plugin: 'com.kaedea.gradle.intransitive'
 
 intransitives {
-    compile 'com.facebook.fresco:fresco:1.0.0'
+    compile 'com.squareup.picasso:picasso:latest.release'
 }
 
