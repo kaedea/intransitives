@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018. Kaede<kidhaibara@gmail.com>
+ */
+
 // 'maven-publish' is a newer plugin than 'maven'
 // See 'https://docs.gradle.org/current/userguide/publishing_maven.html'
 apply plugin: 'maven-publish'

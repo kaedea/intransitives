@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018. Kaede<kidhaibara@gmail.com>
+ */
+
 if ('true' != System.env.JITPACK) {
     include ':app'
 }
