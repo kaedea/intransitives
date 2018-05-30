@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018. Kaede<kidhaibara@gmail.com>
+ */
+
 package com.kaedea.demo.intransitive
 
 import android.os.Bundle
