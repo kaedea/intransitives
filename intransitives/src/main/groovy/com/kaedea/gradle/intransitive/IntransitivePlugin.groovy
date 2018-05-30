@@ -12,7 +12,6 @@ import org.gradle.api.artifacts.DependencyResolutionListener
 import org.gradle.api.artifacts.ResolvableDependencies
 import org.gradle.api.tasks.TaskAction
 
-
 class IntransitivePlugin implements Plugin<Project> {
 
     static final String PLUGIN_EXT_CONFIG = "intransitives"
@@ -22,10 +21,11 @@ class IntransitivePlugin implements Plugin<Project> {
     void apply(Project project) {
         project.extensions.create(PLUGIN_EXT_CONFIG, IntransitiveExtension.class)
         project.task(PLUGIN_TASK_DUMP, type: IntransitiveTask)
-
         project.getGradle().addListener(new DependencyResolutionListener() {
+
             @Override
             void beforeResolve(ResolvableDependencies resolvableDependencies) {
+                project.getGradle().removeListener(this)
                 project.logger.lifecycle "========================"
                 project.logger.lifecycle "Intransitive plugin DependencyResolutionListener#beforeResolve"
                 project.logger.info "Dumping deps info" +
@@ -42,7 +42,6 @@ class IntransitivePlugin implements Plugin<Project> {
                 project.extensions[PLUGIN_EXT_CONFIG].implementations.each {
                     addDependency(project, 'implementation', it)
                 }
-                project.getGradle().removeListener(this)
             }
 
             @Override
@@ -50,51 +49,80 @@ class IntransitivePlugin implements Plugin<Project> {
         })
     }
 
-    private void addDependency(def project, def configuration, def dep) {
+    private void addDependency(def project, def configuration, def config) {
         // Dependency for compilation.
         // Hide transitive dependencies from client.
-        project.configurations[(configuration)].dependencies.add(project.dependencies.create(dep) {
-            transitive = false
-        })
+        def intransitive = project.dependencies.create(config.dep, config.configureClosure)
+        intransitive.transitive = false
+        project.configurations[(configuration)].dependencies.add(intransitive)
+
         // Dependency for package.
         // Need all transitive dependencies in runtime.
-        project.configurations['runtimeOnly'].dependencies.add(project.dependencies.create(dep) {
-            transitive = true
-        })
+        def transitive = project.dependencies.create(config.dep, config.configureClosure)
+        transitive.transitive = true
+        project.configurations['runtimeOnly'].dependencies.add(transitive)
     }
 }
 
 class IntransitiveExtension {
 
-    Set<String> compiles = new HashSet<>()
-    Set<String> apis = new HashSet<>()
-    Set<String> implementations = new HashSet<>()
+    Set<ConfigDelegate> compiles = new HashSet<>()
+    Set<ConfigDelegate> apis = new HashSet<>()
+    Set<ConfigDelegate> implementations = new HashSet<>()
 
     // Use as the following
     // dsl {
     //     compile 'dependency 1'
-    //     compile 'dependency 2'
+    //     compile ('dependency 2') {}
     // }
     void compile(def dep) {
-        compiles << dep
+        compiles << new ConfigDelegate(dep, null)
+    }
+
+    void compile(def dep, Closure configureClosure) {
+        compiles << new ConfigDelegate(dep, configureClosure)
     }
 
     // Use as the following
     // dsl {
     //     api 'dependency 1'
-    //     api 'dependency 2'
+    //     api ('dependency 2') {}
     // }
     void api(def dep) {
-        apis << dep
+        apis << new ConfigDelegate(dep, null)
+    }
+
+    void api(def dep, Closure configureClosure) {
+        apis << new ConfigDelegate(dep, configureClosure)
     }
 
     // Use as the following
     // dsl {
     //     implementation 'dependency 1'
-    //     implementation 'dependency 2'
+    //     implementation ('dependency 2') {}
     // }
     void implementation(def dep) {
-        implementations << dep
+        implementations << new ConfigDelegate(dep, null)
+    }
+
+    void implementation(def dep, Closure configureClosure) {
+        implementations << new ConfigDelegate(dep, configureClosure)
+    }
+}
+
+class ConfigDelegate {
+
+    String dep
+    Closure configureClosure
+
+    ConfigDelegate(String dep, Closure configureClosure) {
+        this.dep = dep
+        this.configureClosure = configureClosure
+    }
+
+    @Override
+    String toString() {
+        return dep
     }
 }
 
