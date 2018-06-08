@@ -1,7 +1,7 @@
 buildscript {
     repositories {
-        google()
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
@@ -48,10 +48,9 @@ dependencies {
 
 // ----------
 // Plugin intransitives
-// ----------
 // Build plugin to local repository before debugging the local plugin.
 // 'gradle :intransitive:publishToMavenLocal--i'
-
+// ----------
 buildscript {
     repositories {
         mavenLocal()
@@ -63,7 +62,8 @@ buildscript {
 }
 
 apply plugin: 'com.kaedea.intransitives'
+
 intransitives {
     // Picasso
-    implementation 'com.squareup.picasso:picasso:latest.release'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
