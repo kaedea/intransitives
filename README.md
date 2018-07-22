@@ -1,4 +1,5 @@
 # Intransitives
+[ ![Download](https://api.bintray.com/packages/kaedea/moe-studio/intransitives/images/download.svg) ](https://bintray.com/kaedea/moe-studio/intransitives/_latestVersion)
 ![version](https://jitpack.io/v/com.kaedea/intransitives.svg) 
 
 Gradle plugin `intransitives` helps to make apis of transitive children dependencies invisible from user.
@@ -36,7 +37,7 @@ Just apply the plugin in the `build.gradle` file of your module.
 // 1. Add dependency
 buildscript {
     repositories {
-        //...
+        jcenter()
         maven { url 'https://jitpack.io' }
     }
     dependencies {

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018. Kaede<kidhaibara@gmail.com>
+ */
+
 buildscript {
     repositories {
         jcenter()
@@ -42,18 +46,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
-/*
- * Copyright (c) 2018. Kaede<kidhaibara@gmail.com>
- */
-
 // ----------
 // Plugin intransitives
 // Build plugin to local repository before debugging the local plugin.
-// 'gradle :intransitive:publishToMavenLocal--i'
+// 'gradle :intransitive:uploadArchives--i'
 // ----------
 buildscript {
     repositories {
-        mavenLocal()
+        maven { url rootProject.file('maven') }
         maven { url 'https://jitpack.io' }
     }
     dependencies {
