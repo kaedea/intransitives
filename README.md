@@ -1,11 +1,15 @@
 # Intransitives
+
 [ ![Download](https://api.bintray.com/packages/kaedea/moe-studio/intransitives/images/download.svg) ](https://bintray.com/kaedea/moe-studio/intransitives/_latestVersion)
 ![version](https://jitpack.io/v/com.kaedea/intransitives.svg) 
+
+![Banner](doc/banner.png)
 
 Gradle plugin `intransitives` helps to make apis of transitive children dependencies invisible from user.
 
 
 ## Problems
+
 When you add an dependency in `build.gradle`, Gradle will also compile transitive children dependencies by default. This behavior makes the dependencies manager much simpler but something we hope to hide the apis of children dependencies. For example, picasso depends on okhttp as the following
 
   APP -> Picasso -> OkHttp
@@ -14,6 +18,7 @@ If we compile picasso, we will also compile okhttp (that is how picasso works). 
 
 
 ## Solution
+
 If we want to avoid accessing of transitive apis, we should set `transitive = false` of complie while `transitive = true` of runtime (hide the apis in compile time and package the apis in runtime). Such as
 
 ```groovy
@@ -31,6 +36,7 @@ And this is how `intransitives` works.
 
 
 ## Getting Started
+
 Just apply the plugin in the `build.gradle` file of your module.
 
 ```groovy
