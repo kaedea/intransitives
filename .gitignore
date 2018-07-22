@@ -2,10 +2,13 @@
 .gradle
 /local.properties
 /.idea/caches
+/.idea/copyright
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
+/.idea/misc.xml
 .DS_Store
 /build
 /captures
 .externalNativeBuild
+/maven
