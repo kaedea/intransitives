@@ -15,4 +15,46 @@ dependencies {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-apply from: 'http://kaedea.github.com/publication/gradle/maven-publish.gradle'
+
+// For new 'maven-publish' plugin:
+// apply from: 'http://kaedea.github.com/gradle-maven-publication/gradle/maven-publish.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url rootProject.file('maven') }
+    }
+    dependencies {
+        classpath 'com.kaedea:publication:0.3.2'
+    }
+}
+apply plugin: 'com.kaedea.publication'
+publication {
+    jarSources = true
+    jarJavaDoc = false
+    jarTests = false
+
+    GROUP('com.kaedea')
+    VERSION_NAME('0.3.0')
+
+    POM_NAME('Intransitive Dependencies')
+    POM_ARTIFACT_ID('intransitives')
+    POM_PACKAGING('jar')
+    POM_URL('https://github.com/kaedea/intransitives/')
+    POM_DESCRIPTION('Gradle plugin for intransitive-compile dependencies.')
+
+    POM_SCM_URL('https://github.com/kaedea/intransitives/')
+    POM_SCM_CONNECTION('scm:git:git://github.com/kaedea/intransitives.git')
+    POM_SCM_DEV_CONNECTION('scm:git:ssh://git@github.com:kaedea/intransitives.git')
+
+    POM_LICENCE_NAME('Apache-2.0')
+    POM_LICENCE_URL('http://www.apache.org/licenses/LICENSE-2.0.txt')
+    POM_LICENCE_DIST('repo')
+
+    POM_DEVELOPER_ID('kaedea')
+    POM_DEVELOPER_NAME('Kaede Akatsuki')
+
+    uploadToBintray = true
+    BINTRAY_REPO('moe-studio')
+    BINTRAY_NAME('intransitives')
+}
