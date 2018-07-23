@@ -1,12 +1,11 @@
 # Intransitives
 
-[ ![Download](https://api.bintray.com/packages/kaedea/moe-studio/intransitives/images/download.svg) ](https://bintray.com/kaedea/moe-studio/intransitives/_latestVersion)
-![version](https://jitpack.io/v/com.kaedea/intransitives.svg) 
+[![Download](https://api.bintray.com/packages/kaedea/moe-studio/intransitives/images/download.svg)](https://bintray.com/kaedea/moe-studio/intransitives/_latestVersion)
+![version](https://jitpack.io/v/com.kaedea/intransitives.svg)
 
 ![Banner](doc/banner.png)
 
 Gradle plugin `intransitives` helps to make apis of transitive children dependencies invisible from user.
-
 
 ## Problems
 
@@ -15,7 +14,6 @@ When you add an dependency in `build.gradle`, Gradle will also compile transitiv
   APP -> Picasso -> OkHttp
 
 If we compile picasso, we will also compile okhttp (that is how picasso works). In another word, the apis of okhttp is visible to us though we do not compile it explictly. If we do not announce compling okhttp explictly, we should not access its apis. Because the implementaion of picasso might changes so that it does not compile okhttp any more.
-
 
 ## Solution
 
@@ -34,12 +32,13 @@ dependencies {
 
 And this is how `intransitives` works.
 
-
 ## Getting Started
 
 Just apply the plugin in the `build.gradle` file of your module.
 
 ```groovy
+// ~/project/build.gradle
+
 // 1. Add dependency
 buildscript {
     repositories {
@@ -61,6 +60,10 @@ intransitives {
 
 Use task `:app:intransitives` to dump your intransitive dependencies confinguration.
 
-
 ## License
-Licensed under the Apache License, Version 2.0 (the "License").
+
+The project is [Apache License, Version 2.0](/LICENSE) licensed.
+
+## Contributions
+
+The project takes **[git-flow](https://github.com/nvie/gitflow)** as princeple to contribute codes. Any pull-request should rebase and be merged into branch develop.
