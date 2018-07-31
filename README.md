@@ -60,10 +60,10 @@ intransitives {
 
 Use task `:app:intransitives` to dump your intransitive dependencies confinguration.
 
+## Contributing
+
+Check [CONTRIBUTING.md](/CONTRIBUTING.md).
+
 ## License
 
 The project is [Apache License, Version 2.0](/LICENSE) licensed.
-
-## Contributions
-
-The project takes **[git-flow](https://github.com/nvie/gitflow)** as princeple to contribute codes. Any pull-request should rebase and be merged into branch develop.
